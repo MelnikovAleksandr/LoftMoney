@@ -1,4 +1,4 @@
-package com.mas.loftschool;
+package com.mas.loftmoney;
 
 import org.junit.Test;
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    tools:context=".AddItemActivity"
+    tools:layout_editor_absoluteX="0dp">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editExpenses"
+        android:layout_width="296dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="113dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/editExpenses"
+        android:textColorHint="@color/colorOfTextAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorOfTextAdd"
+
+             />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameOfExpenses"
+        android:layout_width="296dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+
+        android:hint="@string/nameOfExpenses"
+        android:textColorHint="@color/colorOfTextAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editExpenses" >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorOfTextAdd"
+            />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonToAdd"
+        android:background="@android:color/transparent"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="112dp"
+        android:drawableLeft="@drawable/ic_shapebuttontoadd"
+        android:text="@string/buttonToAdd"
+        android:textColor="@drawable/button_change_text_color"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameOfExpenses"
+
+
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
