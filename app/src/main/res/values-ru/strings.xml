@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LoftSchool</string>
+    <string name="editExpenses">Расход</string>
+    <string name="nameOfExpenses">Название</string>
+    <string name="buttonToAdd">ДОБАВИТЬ</string>
+
+
+</resources>
