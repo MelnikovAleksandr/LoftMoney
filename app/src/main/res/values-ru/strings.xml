@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LoftSchool</string>
-    <string name="editExpenses">Расход</string>
-    <string name="nameOfExpenses">Название</string>
-    <string name="buttonToAdd">ДОБАВИТЬ</string>
+    <string name="edit_expenses">Расход</string>
+    <string name="name_of_expenses">Название</string>
+    <string name="button_to_add">ДОБАВИТЬ</string>
 
 
 </resources>

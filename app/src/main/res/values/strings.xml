@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LoftSchool</string>
-    <string name="editExpenses">Consumption</string>
-    <string name="nameOfExpenses">Name</string>
-    <string name="buttonToAdd">ADD</string>
+    <string name="edit_expenses">Consumption</string>
+    <string name="name_of_expenses">Name</string>
+    <string name="button_to_add">ADD</string>
 
 </resources>

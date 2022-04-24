@@ -10,48 +10,50 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editExpenses"
+        android:id="@+id/edit_expenses"
         android:layout_width="296dp"
         android:layout_height="62dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="113dp"
         android:layout_marginEnd="32dp"
-        android:hint="@string/editExpenses"
-        android:textColorHint="@color/colorOfTextAdd"
+        android:hint="@string/edit_expenses"
+        android:textColorHint="@color/color_of_text_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_expenses_main_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorOfTextAdd"
+            android:textColor="@color/color_of_text_add"
 
              />
         </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameOfExpenses"
+        android:id="@+id/name_of_expenses"
         android:layout_width="296dp"
         android:layout_height="62dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
 
-        android:hint="@string/nameOfExpenses"
-        android:textColorHint="@color/colorOfTextAdd"
+        android:hint="@string/name_of_expenses"
+        android:textColorHint="@color/color_of_text_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editExpenses" >
+        app:layout_constraintTop_toBottomOf="@+id/edit_expenses" >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_of_expenses_main_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorOfTextAdd"
+            android:textColor="@color/color_of_text_add"
             />
         </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/buttonToAdd"
+        android:id="@+id/button_to_add"
         android:background="@android:color/transparent"
         android:layout_width="136dp"
         android:layout_height="48dp"
@@ -59,13 +61,12 @@
         android:layout_marginTop="57dp"
         android:layout_marginEnd="112dp"
         android:drawableLeft="@drawable/shape_change_color_after_click"
-        android:text="@string/buttonToAdd"
+        android:text="@string/button_to_add"
         android:textColor="@drawable/button_change_text_color"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameOfExpenses"
-
+        app:layout_constraintTop_toBottomOf="@+id/name_of_expenses"
 
 
         />
