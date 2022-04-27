@@ -68,7 +68,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_of_expenses"
 
-
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
