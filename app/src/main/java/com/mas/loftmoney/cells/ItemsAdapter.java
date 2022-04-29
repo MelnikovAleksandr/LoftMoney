@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.mas.loftmoney.R;
+
 import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
@@ -53,7 +56,5 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
             titleTextView = itemView.findViewById(R.id.moneyCellTitleView);
             valueTextView = itemView.findViewById(R.id.moneyCellValueView);
         }
-
     }
-
 }
