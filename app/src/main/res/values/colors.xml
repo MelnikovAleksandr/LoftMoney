@@ -9,7 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_of_text_add">#3574FA</color>
     <color name="color_primary">#DBDBDB</color>
-    <color name="green_after_click_on_btn">#7ED321</color>
+    <color name="all_green_elements">#7ED321</color>
     <color name="cell_title_color">#666664</color>
     <color name="cell_value_color">#4a90e2</color>
+    <color name="main_background">#3574FA</color>
+    <color name="not_select_tab_text">#8BAAEF</color>
+    <color name="indicator_line">#FFC107</color>
+
+
 </resources>

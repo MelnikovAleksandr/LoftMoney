@@ -10,7 +10,7 @@
     android:paddingTop="28dp">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/moneyCellTitleView"
+        android:id="@+id/moneyCellTitleView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -18,19 +18,19 @@
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/cell_title_color"
         android:textSize="20sp"
-        tools:text="" />
+        tools:text="Test" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/moneyCellValueView"
+        android:id="@+id/moneyCellValueView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
         android:fontFamily="sans-serif-medium"
         android:gravity="right"
-        android:textColor="@color/cell_value_color"
+        android:textColor="@color/all_green_elements"
         android:textSize="20sp"
-        tools:text="" />
+        tools:text="20$" />
 
 </LinearLayout>
 
