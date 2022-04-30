@@ -2,23 +2,28 @@ package com.mas.loftmoney;
 
 
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.mas.loftmoney.cells.Item;
 import com.mas.loftmoney.cells.ItemsAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class ExpensesFragment extends Fragment {
 
+    String param1;
+    String param2;
     View v;
     private RecyclerView recyclerView;
     private List<Item> firstFragment;
@@ -49,21 +54,8 @@ public class ExpensesFragment extends Fragment {
         firstFragment.add(new Item("Milk", "1.23$"));
         firstFragment.add(new Item("Milk", "1.23$"));
         firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
 
 
     }
+
 }

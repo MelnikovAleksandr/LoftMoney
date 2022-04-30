@@ -15,6 +15,7 @@
     <color name="main_background">#3574FA</color>
     <color name="not_select_tab_text">#8BAAEF</color>
     <color name="indicator_line">#FFC107</color>
+    <color name="add_button_main">#FF9E57</color>
 
 
 </resources>

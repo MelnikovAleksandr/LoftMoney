@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mas.loftmoney.cells.Item;
-import com.mas.loftmoney.cells.ItemsAdapter;
 import com.mas.loftmoney.cells.ItemsAdapterIncomes;
 
 import java.util.ArrayList;
@@ -47,22 +46,7 @@ public class IncomeFragment extends Fragment {
         firstFragment = new ArrayList<>();
         firstFragment.add(new Item("salary", "1000$"));
         firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
+
 
 
 

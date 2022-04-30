@@ -7,7 +7,8 @@
     android:paddingBottom="28dp"
     android:paddingEnd="24dp"
     android:paddingStart="24dp"
-    android:paddingTop="28dp">
+    android:paddingTop="28dp"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/moneyCellTitleView"
