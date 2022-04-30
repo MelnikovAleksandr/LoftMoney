@@ -6,12 +6,13 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
         setContentView(R.layout.main_fragments_activity);
 
         tabLayout = findViewById(R.id.tab_layout);
@@ -35,7 +38,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout.setupWithViewPager(viewPager);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.add_button_main);
-        floatingActionButton.setOnClickListener(this);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final int activeFragmentIndex = viewPager.getCurrentItem();
+                Fragment activeFragment = getSupportFragmentManager().getFragments().get(activeFragmentIndex);
+                activeFragment.startActivityForResult(new Intent(MainActivity.this, AddItemActivity.class),
+                        ExpensesFragment.ADD_ITEM_REQUEST_CODE);
+
+            }
+        });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -65,13 +77,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
-
-    @Override
-    public void onClick(View view) {
-        Intent i;
-        i = new Intent(this, AddItemActivity.class);
-        startActivity(i);
-    }
-
 
 }

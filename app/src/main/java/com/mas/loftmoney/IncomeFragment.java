@@ -1,5 +1,7 @@
 package com.mas.loftmoney;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import java.util.List;
 
 public class IncomeFragment extends Fragment {
 
+    public static final int ADD_ITEM_REQUEST_CODE = 100;
     View v;
     private RecyclerView recyclerView;
     private List<Item> firstFragment;
@@ -47,9 +50,17 @@ public class IncomeFragment extends Fragment {
         firstFragment.add(new Item("salary", "1000$"));
         firstFragment.add(new Item("salary", "1000$"));
 
+    }
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_ITEM_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            final String price = data.getStringExtra("price");
+            final String name = data.getStringExtra("name");
+
+            firstFragment.add(new Item(name, price));
 
 
-
-
+        }
     }
 }

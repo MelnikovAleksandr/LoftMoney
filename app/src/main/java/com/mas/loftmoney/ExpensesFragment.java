@@ -1,6 +1,8 @@
 package com.mas.loftmoney;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -22,8 +24,7 @@ import java.util.List;
 
 public class ExpensesFragment extends Fragment {
 
-    String param1;
-    String param2;
+    public static final int ADD_ITEM_REQUEST_CODE = 100; //?!
     View v;
     private RecyclerView recyclerView;
     private List<Item> firstFragment;
@@ -38,9 +39,11 @@ public class ExpensesFragment extends Fragment {
         v = inflater.inflate(R.layout.recycler_view_expenses, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.itemsViewExpensesRecycler);
         ItemsAdapter itemsAdapter = new ItemsAdapter(getContext(), firstFragment);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(itemsAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getResources()));
+
         return v;
 
 
@@ -51,6 +54,7 @@ public class ExpensesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         firstFragment = new ArrayList<>();
+
         firstFragment.add(new Item("Milk", "1.23$"));
         firstFragment.add(new Item("Milk", "1.23$"));
         firstFragment.add(new Item("Milk", "1.23$"));
@@ -58,4 +62,16 @@ public class ExpensesFragment extends Fragment {
 
     }
 
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_ITEM_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            final String price = data.getStringExtra("price");
+            final String name = data.getStringExtra("name");
+
+            firstFragment.add(new Item(name, price));
+
+
+        }
+    }
 }
