@@ -55,11 +55,6 @@ public class ExpensesFragment extends Fragment {
 
         firstFragment = new ArrayList<>();
 
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-        firstFragment.add(new Item("Milk", "1.23$"));
-
-
     }
 
     @Override
@@ -69,7 +64,7 @@ public class ExpensesFragment extends Fragment {
             final String price = data.getStringExtra("price");
             final String name = data.getStringExtra("name");
 
-            firstFragment.add(new Item(name, price));
+            firstFragment.add(new Item(name, price + " ₽"));
 
 
         }

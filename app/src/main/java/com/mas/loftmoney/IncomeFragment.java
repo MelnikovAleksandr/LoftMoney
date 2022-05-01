@@ -47,8 +47,6 @@ public class IncomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         firstFragment = new ArrayList<>();
-        firstFragment.add(new Item("salary", "1000$"));
-        firstFragment.add(new Item("salary", "1000$"));
 
     }
     @Override
@@ -58,7 +56,7 @@ public class IncomeFragment extends Fragment {
             final String price = data.getStringExtra("price");
             final String name = data.getStringExtra("name");
 
-            firstFragment.add(new Item(name, price));
+            firstFragment.add(new Item(name, price+ " ₽"));
 
 
         }

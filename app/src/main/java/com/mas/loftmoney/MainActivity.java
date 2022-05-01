@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
 
         adapter.AddFragment(new ExpensesFragment(),getString(R.string.Expenses_tab));
         adapter.AddFragment(new IncomeFragment(),getString(R.string.Income_tab));
-        adapter.AddFragment(new BalanceFragment(),getString(R.string.Balance_tab));
+        //adapter.AddFragment(new BalanceFragment(),getString(R.string.Balance_tab));
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
