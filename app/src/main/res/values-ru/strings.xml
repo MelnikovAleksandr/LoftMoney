@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LoftSchool</string>
-    <string name="edit_expenses">Расход</string>
+    <string name="edit_expenses">Цена</string>
     <string name="name_of_expenses">Название</string>
     <string name="button_to_add">ДОБАВИТЬ</string>
+    <string name="toolbar_name">Учёт бюджета</string>
+    <string name="Expenses_tab">Расходы</string>
+    <string name="Income_tab">Доходы</string>
+    <string name="Balance_tab">Баланс</string>
 
 
 </resources>

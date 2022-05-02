@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/itemsView"
+        android:id="@+id/itemsViewIncomesRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/cell_money" />
+        tools:listitem="@layout/cell_money_income" />
 
 </RelativeLayout>

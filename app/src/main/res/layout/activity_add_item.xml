@@ -23,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_expenses_main_field"
+            android:inputType="numberDecimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/color_of_text_add"
@@ -46,6 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_expenses" >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_of_expenses_main_field"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/color_of_text_add"
