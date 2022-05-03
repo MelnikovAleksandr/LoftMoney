@@ -33,3 +33,5 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration{
         }
     }
 }
+
+//recyclerView.addItemDecoration(new DividerItemDecoration(getResources())); onCreateView

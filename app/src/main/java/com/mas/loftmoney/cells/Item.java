@@ -2,28 +2,27 @@ package com.mas.loftmoney.cells;
 
 public class Item {
 
-    private String title;
-    private String value;
+    private String name;
+    private int amount;
 
-
-    public Item(String title, String value) {
-        this.title = title;
-        this.value = value;
+    public Item(String name, int amount) {
+        this.name = name;
+        this.amount = amount;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getValue() {
-        return value;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

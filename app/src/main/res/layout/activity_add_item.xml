@@ -47,7 +47,6 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_expenses" >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_of_expenses_main_field"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/color_of_text_add"
@@ -65,7 +64,7 @@
         android:drawableLeft="@drawable/shape_change_color_after_click"
         android:text="@string/button_to_add"
         android:textColor="@drawable/button_change_text_color"
-        android:textSize="12sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_of_expenses"
