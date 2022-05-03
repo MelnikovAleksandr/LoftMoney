@@ -10,7 +10,8 @@
         android:id="@+id/itemsViewExpensesRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/cell_money" />
+        tools:listitem="@layout/cell_money"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_button_main"
         android:layout_width="wrap_content"

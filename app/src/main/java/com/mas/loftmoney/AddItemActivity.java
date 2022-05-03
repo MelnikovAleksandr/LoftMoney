@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.view.View;
 import android.text.TextWatcher;
 import android.widget.Button;
@@ -19,6 +20,8 @@ public class AddItemActivity extends AppCompatActivity {
 
     TextInputEditText nameEditText;
     TextInputEditText valueEditText;
+
+    private Button button;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
