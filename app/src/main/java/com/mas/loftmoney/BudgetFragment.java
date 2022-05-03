@@ -52,7 +52,7 @@ public class BudgetFragment extends Fragment {
         FloatingActionButton floatingActionButton = view.findViewById(R.id.add_button_main);
         floatingActionButton.setOnClickListener(v -> startActivityForResult(new Intent(getActivity(), AddItemActivity.class), ADD_ITEM_REQUEST_CODE));
 
-        RecyclerView recyclerView = view.findViewById(R.id.itemsViewExpensesRecycler);
+        RecyclerView recyclerView = view.findViewById(R.id.itemsViewRecycler);
         recyclerView.addItemDecoration(new DividerItemDecoration(getResources()));
         if (getArguments() != null) {
             itemsAdapter = new ItemsAdapter(getArguments().getInt(COLOR_ID));
