@@ -9,6 +9,8 @@
     <string name="Income_tab">Income</string>
     <string name="Balance_tab">Balance</string>
 
+    <string name="connection_lost">Sorry, connection lost…</string>
+    <string name="success_added">Income was successfully added</string>
 
 
 </resources>

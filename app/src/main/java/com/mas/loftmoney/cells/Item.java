@@ -1,11 +1,13 @@
 package com.mas.loftmoney.cells;
 
+import com.mas.loftmoney.remote.MoneyRemoteItem;
+
 public class Item {
 
     private String name;
-    private int amount;
+    private double amount;
 
-    public Item(String name, int amount) {
+    public Item(String name, double amount) {
         this.name = name;
         this.amount = amount;
     }
@@ -18,11 +20,15 @@ public class Item {
         this.name = name;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public static Item getInstance(MoneyRemoteItem moneyRemoteItem) {
+        return new Item(moneyRemoteItem.getName(), moneyRemoteItem.getPrice());
     }
 }

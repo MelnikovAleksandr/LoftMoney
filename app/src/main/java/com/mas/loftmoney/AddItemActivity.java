@@ -10,8 +10,15 @@ import android.text.TextUtils;
 import android.view.View;
 import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class AddItemActivity extends AppCompatActivity {
 
@@ -23,6 +30,9 @@ public class AddItemActivity extends AppCompatActivity {
 
     private Button button;
 
+    private String name;
+    private String prise;
+
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,25 +43,40 @@ public class AddItemActivity extends AppCompatActivity {
         valueEditText = findViewById(R.id.edit_expenses_main_field);
 
         setTextWatcher(nameEditText, button);
-        setTextWatcher(valueEditText,button);
+        setTextWatcher(valueEditText, button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = nameEditText.getText().toString();
-                String prise = valueEditText.getText().toString();
+        button.setOnClickListener(view -> {
 
-                Intent intent = new Intent();
-                intent.putExtra(KEY_AMOUNT, prise);
-                intent.putExtra(KEY_NAME, name);
+            Disposable disposable = ((LoftApp) getApplication()).moneyApi.postMoney(
+                    Integer.parseInt(valueEditText.getText().toString()),
+                    nameEditText.getText().toString(),
+                    "income"
+            )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(() -> {
+                        Toast.makeText(getApplicationContext(), getString(R.string.success_added), Toast.LENGTH_LONG).show();
+                        finish();
+                    }, throwable -> {
+                        Toast.makeText(getApplicationContext(), throwable.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
-                setResult(RESULT_OK, intent);
-                finish();
-            }
+                    });
+
+
+            String name = nameEditText.getText().toString();
+            String prise = valueEditText.getText().toString();
+
+            Intent intent = new Intent();
+            intent.putExtra(KEY_AMOUNT, prise);
+            intent.putExtra(KEY_NAME, name);
+
+            setResult(RESULT_OK, intent);
+            finish();
         });
 
     }
-    private void setTextWatcher (TextInputEditText editText, Button button) {
+
+    private void setTextWatcher(TextInputEditText editText, Button button) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

@@ -13,7 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity{
 
         viewPager.setAdapter(new ViewPagerAdapter(this));
 
-        final String[] fragmentsTitles = new String[] {getString(R.string.Expenses_tab), getString(R.string.Income_tab)};
+        final String[] fragmentsTitles = new String[]{getString(R.string.Expenses_tab), getString(R.string.Income_tab)};
 
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity{
             }
         }).attach();
     }
+
     public class ViewPagerAdapter extends FragmentStateAdapter {
 
         public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {

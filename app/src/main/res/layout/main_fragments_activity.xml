@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:background="@color/main_background"
         app:title="@string/toolbar_name"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@android:color/white"
+        app:layout_scrollFlags="scroll|snap"/>
 
         <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
