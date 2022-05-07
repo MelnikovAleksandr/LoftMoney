@@ -1,5 +1,6 @@
 package com.mas.loftmoney;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,10 +11,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
+
+    private int currentPosition = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,17 +31,40 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new ViewPagerAdapter(this));
 
-        final String[] fragmentsTitles = new String[]{getString(R.string.Expenses_tab), getString(R.string.Income_tab)};
-
-        new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(fragmentsTitles[position]);
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                currentPosition = position;
             }
-        }).attach();
+        });
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.add_button_main);
+        Intent intent = new Intent(this, AddItemActivity.class);
+
+        floatingActionButton.setOnClickListener(view -> {
+            String type = "0";
+            if (currentPosition == 0) {
+                type = "expense";
+            } else if (currentPosition == 1) {
+                type = "income";
+            }
+            intent.putExtra(BudgetFragment.TYPE, type);
+            startActivity(intent);
+        });
+
+        final String[] fragmentsTitles = new String[]{getString(R.string.expenses), getString(R.string.incomes)};
+
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(fragmentsTitles[position])).attach();
     }
 
     public class ViewPagerAdapter extends FragmentStateAdapter {
+
+        private Fragment fragment;
+
+        public Fragment getFragment() {
+            return fragment;
+        }
 
         public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
             super(fragmentActivity);
@@ -48,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
         public Fragment createFragment(int position) {
             switch (position) {
                 case 0:
-                    return BudgetFragment.newInstance(R.color.cell_value_color, getString(R.string.Expenses_tab));
+                    return BudgetFragment.newInstance(R.color.cell_value_color, getString(R.string.expense));
                 case 1:
-                    return BudgetFragment.newInstance(R.color.all_green_elements, getString(R.string.Income_tab));
+                    return BudgetFragment.newInstance(R.color.all_green_elements, getString(R.string.income));
                 default:
                     return null;
             }

@@ -15,5 +15,5 @@ public interface MoneyApi {
 
     @POST("./items/add")
     @FormUrlEncoded
-    Completable postMoney(@Field("price") int price, @Field("name") String name, @Field("type") String type);
+    Completable addMoney(@Field("price") int price, @Field("name") String name, @Field("type") String type);
 }
