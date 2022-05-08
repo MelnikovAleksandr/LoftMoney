@@ -1,4 +1,4 @@
-package com.mas.loftmoney;
+package com.mas.loftmoney.screens.budget;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -7,8 +7,10 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mas.loftmoney.R;
 
-public class DividerItemDecoration extends RecyclerView.ItemDecoration{
+
+public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 
     public DividerItemDecoration(Resources resources) {
@@ -33,5 +35,3 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration{
         }
     }
 }
-
-//recyclerView.addItemDecoration(new DividerItemDecoration(getResources())); onCreateView

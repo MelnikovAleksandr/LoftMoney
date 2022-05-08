@@ -5,9 +5,18 @@
     <string name="name_of_expenses">Название</string>
     <string name="button_to_add">ДОБАВИТЬ</string>
     <string name="toolbar_name">Учёт бюджета</string>
-    <string name="Expenses_tab">Расходы</string>
-    <string name="Income_tab">Доходы</string>
+    <string name="expense">Expense</string>
+    <string name="income">Income</string>
     <string name="Balance_tab">Баланс</string>
+    <string name="expenses">Расходы</string>
+    <string name="incomes">Доходы</string>
 
+    <string name="connection_lost">Извините, соединение прервано…</string>
+    <string name="success_added">Income was successfully added</string>
+    <string name="login">Войти</string>
+
+    <string name="client_secret">972841536315-224ca3khm9k6ed91g6eidne3hbgrl80i.apps.googleusercontent.com</string>
+    <string name="client_secret2">972841536315-1f3qr661m85nmiub1pjp7dfqlergl360.apps.googleusercontent.com</string>
+    <string name="client_id">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</string>
 
 </resources>

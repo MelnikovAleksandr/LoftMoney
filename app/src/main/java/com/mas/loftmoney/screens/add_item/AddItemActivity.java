@@ -1,27 +1,34 @@
-package com.mas.loftmoney;
+package com.mas.loftmoney.screens.add_item;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
-import android.view.View;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.mas.loftmoney.screens.budget.BudgetFragment;
+import com.mas.loftmoney.remote.LoftApp;
+import com.mas.loftmoney.R;
+import com.mas.loftmoney.remote.MoneyApi;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class AddItemActivity extends AppCompatActivity {
-
-    public static final String KEY_NAME = "name";
-    public static final String KEY_AMOUNT = "amount";
 
     TextInputEditText nameEditText;
     TextInputEditText valueEditText;
 
-    private Button button;
+    private MoneyApi moneyApi;
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -33,25 +40,32 @@ public class AddItemActivity extends AppCompatActivity {
         valueEditText = findViewById(R.id.edit_expenses_main_field);
 
         setTextWatcher(nameEditText, button);
-        setTextWatcher(valueEditText,button);
+        setTextWatcher(valueEditText, button);
 
+        moneyApi = ((LoftApp) getApplication()).moneyApi;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = nameEditText.getText().toString();
-                String prise = valueEditText.getText().toString();
+                int price = Integer.parseInt(valueEditText.getText().toString());
 
-                Intent intent = new Intent();
-                intent.putExtra(KEY_AMOUNT, prise);
-                intent.putExtra(KEY_NAME, name);
-
-                setResult(RESULT_OK, intent);
-                finish();
+                Bundle args = getIntent().getExtras();
+                String type = args.getString(BudgetFragment.TYPE);
+                String token = getSharedPreferences(getString(R.string.app_name),0).getString(LoftApp.AUTH_KEY,"");
+                Disposable disposable = moneyApi.addMoney(price, name, type, token)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(() -> {
+                            finish();
+                        }, throwable -> {
+                            Toast.makeText(getApplicationContext(), throwable.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        });
+                compositeDisposable.add(disposable);
             }
         });
-
     }
-    private void setTextWatcher (TextInputEditText editText, Button button) {
+
+    private void setTextWatcher(TextInputEditText editText, Button button) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -72,5 +86,12 @@ public class AddItemActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.dispose();
+
     }
 }

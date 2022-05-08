@@ -1,4 +1,4 @@
-package com.mas.loftmoney;
+package com.mas.loftmoney.screens.budget;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mas.loftmoney.cells.Item;
+import com.mas.loftmoney.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = View.inflate(parent.getContext(), R.layout.cell_money,null);
-        return new ItemViewHolder(itemView,colorId);
+        View itemView = View.inflate(parent.getContext(), R.layout.cell_money, null);
+        return new ItemViewHolder(itemView, colorId);
     }
 
     @Override
@@ -36,7 +36,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
     }
 
-    public void addItem (Item item) {
+    public void setData(List<Item> itemsList) {
+        itemList.clear();
+        itemList.addAll(itemsList);
+        notifyDataSetChanged();
+    }
+
+    public void addItem(Item item) {
         itemList.add(item);
         notifyDataSetChanged();
     }
@@ -56,12 +62,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
             titleTextView = itemView.findViewById(R.id.moneyCellTitleView);
             valueTextView = itemView.findViewById(R.id.moneyCellValueView);
-            valueTextView.setTextColor(ContextCompat.getColor(valueTextView.getContext(),colorId));
+            valueTextView.setTextColor(ContextCompat.getColor(valueTextView.getContext(), colorId));
         }
-        public void bindItem (@NonNull final Item item) {
+
+        public void bindItem(@NonNull final Item item) {
             titleTextView.setText(item.getName());
             valueTextView.setText(String.valueOf(item.getAmount()) + " $");
 
         }
     }
+
+
 }
