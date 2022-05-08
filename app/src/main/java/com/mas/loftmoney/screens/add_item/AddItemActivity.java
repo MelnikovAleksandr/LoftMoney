@@ -1,4 +1,4 @@
-package com.mas.loftmoney;
+package com.mas.loftmoney.screens.add_item;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.mas.loftmoney.screens.budget.BudgetFragment;
+import com.mas.loftmoney.remote.LoftApp;
+import com.mas.loftmoney.R;
 import com.mas.loftmoney.remote.MoneyApi;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -23,7 +26,7 @@ public class AddItemActivity extends AppCompatActivity {
     TextInputEditText nameEditText;
     TextInputEditText valueEditText;
 
-    MoneyApi moneyApi;
+    private MoneyApi moneyApi;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -48,7 +51,8 @@ public class AddItemActivity extends AppCompatActivity {
 
                 Bundle args = getIntent().getExtras();
                 String type = args.getString(BudgetFragment.TYPE);
-                Disposable disposable = moneyApi.addMoney(price, name, type)
+                String token = getSharedPreferences(getString(R.string.app_name),0).getString(LoftApp.AUTH_KEY,"");
+                Disposable disposable = moneyApi.addMoney(price, name, type, token)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(() -> {

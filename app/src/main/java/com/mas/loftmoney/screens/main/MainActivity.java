@@ -1,4 +1,4 @@
-package com.mas.loftmoney;
+package com.mas.loftmoney.screens.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.mas.loftmoney.R;
+import com.mas.loftmoney.screens.add_item.AddItemActivity;
+import com.mas.loftmoney.screens.budget.BudgetFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main_fragments_activity);
+        setContentView(R.layout.activity_main);
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
 

@@ -1,4 +1,4 @@
-package com.mas.loftmoney;
+package com.mas.loftmoney.remote;
 
 import android.app.Application;
 
@@ -13,6 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoftApp extends Application {
 
     public MoneyApi moneyApi;
+    public AuthApi authApi;
+    public static String AUTH_KEY = "authKey";
 
     @Override
     public void onCreate() {
@@ -28,12 +30,13 @@ public class LoftApp extends Application {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://verdant-violet.glitch.me/")
+                .baseUrl("https://loftschool.com/android-api/basic/v1/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         moneyApi = retrofit.create(MoneyApi.class);
+        authApi = retrofit.create(AuthApi.class);
     }
 }

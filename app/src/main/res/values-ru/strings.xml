@@ -13,6 +13,7 @@
 
     <string name="connection_lost">Извините, соединение прервано…</string>
     <string name="success_added">Income was successfully added</string>
+    <string name="login">Войти</string>
 
 
 </resources>

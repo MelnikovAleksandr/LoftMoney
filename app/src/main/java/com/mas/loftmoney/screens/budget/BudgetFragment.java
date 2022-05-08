@@ -1,4 +1,4 @@
-package com.mas.loftmoney;
+package com.mas.loftmoney.screens.budget;
 
 import android.os.Bundle;
 
@@ -10,20 +10,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.mas.loftmoney.cells.Item;
+import com.mas.loftmoney.remote.LoftApp;
+import com.mas.loftmoney.R;
 import com.mas.loftmoney.remote.MoneyApi;
-import com.mas.loftmoney.remote.MoneyRemoteItem;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class BudgetFragment extends Fragment {
@@ -33,12 +26,12 @@ public class BudgetFragment extends Fragment {
 
     private ItemsAdapter itemsAdapter;
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private MoneyApi moneyApi;
     private String type;
+
+    private BudgetViewModel budgetViewModel;
 
 
     public static BudgetFragment newInstance(final int colorId, final String type) {
@@ -53,13 +46,14 @@ public class BudgetFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.recycler_view,container,false);
+        return inflater.inflate(R.layout.fragment_budget,container,false);
     }
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        configureViewModel();
 
         moneyApi = ((LoftApp) getActivity().getApplication()).moneyApi;
         RecyclerView recyclerView = view.findViewById(R.id.itemsViewRecycler);
@@ -91,24 +85,28 @@ public class BudgetFragment extends Fragment {
 
     private void loadItems() {
 
-        Disposable disposable = moneyApi.getMoneyItems(type)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(moneyResponse -> {
-                    List<Item> itemList = new ArrayList<>();
-                    for (MoneyRemoteItem moneyRemoteItem : moneyResponse.getMoneyItemsList()) {
-                        itemList.add(Item.getInstance(moneyRemoteItem));
-                    }
-                    itemsAdapter.setData(itemList);
-                }, throwable -> {
-                    Toast.makeText(getActivity().getApplication(), throwable.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                });
-        compositeDisposable.add(disposable);
+        budgetViewModel.loadItemsData(((LoftApp) getActivity().getApplication())
+                .moneyApi, type, getActivity().getSharedPreferences(getString(R.string.app_name),0));
+
+    }
+    private void configureViewModel() {
+        budgetViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
+        budgetViewModel.moneyItemList.observe(getViewLifecycleOwner(), itemList -> {
+            itemsAdapter.setData(itemList);
+        });
+        budgetViewModel.messageString.observe(getViewLifecycleOwner(), message -> {
+            if(!message.equals("")) {
+                showToast(message);
+            }
+        });
+        budgetViewModel.messageInt.observe(getViewLifecycleOwner(), message -> {
+            if (message > 0 ) {
+                showToast(getString(message));
+            }
+        });
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.dispose();
+    private void showToast (String message) {
+        Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 }

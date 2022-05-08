@@ -1,4 +1,4 @@
-package com.mas.loftmoney;
+package com.mas.loftmoney.screens.budget;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mas.loftmoney.cells.Item;
+import com.mas.loftmoney.R;
 
 import java.util.ArrayList;
 import java.util.List;

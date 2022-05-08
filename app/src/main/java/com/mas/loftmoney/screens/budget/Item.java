@@ -1,4 +1,4 @@
-package com.mas.loftmoney.cells;
+package com.mas.loftmoney.screens.budget;
 
 import com.mas.loftmoney.remote.MoneyRemoteItem;
 
