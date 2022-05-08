@@ -10,6 +10,8 @@ import com.mas.loftmoney.remote.MoneyApi;
 import com.mas.loftmoney.remote.MoneyRemoteItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -35,6 +37,19 @@ public class BudgetViewModel extends ViewModel {
         compositeDisposable.add(moneyApi.getMoneyItems(type,authToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map(unsortedList -> {
+                    List<MoneyRemoteItem> sortedList = new ArrayList<>(unsortedList);
+                    Collections.sort(sortedList, new Comparator<MoneyRemoteItem>() {
+                        @Override
+                        public int compare(MoneyRemoteItem t1, MoneyRemoteItem t2) {
+                            if (t1.getDate() == null || t2.getDate() ==null)
+                                return 0;
+                            return t1.getDate().compareTo(t2.getDate());
+                        }
+                    });
+                    Collections.reverse(sortedList);
+                    return sortedList;
+                })
                 .subscribe(moneyRemoteItems -> {
                     List<Item> itemList = new ArrayList<>();
                     for (MoneyRemoteItem moneyRemoteItem : moneyRemoteItems) {

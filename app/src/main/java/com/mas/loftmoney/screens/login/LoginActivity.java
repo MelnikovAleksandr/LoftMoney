@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private GoogleSignInClient mGoogleSignInClient;
-    private int RC_SIGN_IN = 1408;
+    private final int RC_SIGN_IN = 1408;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void configureGoogleAuth() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                //.requestIdToken(getString(R.string.client_id))
                 .requestEmail()
                 .build();
 
