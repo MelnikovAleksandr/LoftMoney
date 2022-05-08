@@ -17,7 +17,7 @@
             android:exported="false">
         </activity>
         <activity
-                android:name="com.mas.loftmoney.screens.add_item.AddItemActivity"
+                android:name=".screens.add_item.AddItemActivity"
                 android:exported="false" >
         </activity>
         <activity
