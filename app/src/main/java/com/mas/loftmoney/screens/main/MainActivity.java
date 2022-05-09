@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton floatingActionButton = findViewById(R.id.add_button_main);
         Intent intent = new Intent(this, AddItemActivity.class);
 
+
         floatingActionButton.setOnClickListener(view -> {
             String type = "0";
             if (currentPosition == 0) {
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
             }
             intent.putExtra(BudgetFragment.TYPE, type);
             startActivity(intent);
+            overridePendingTransition(R.anim.to_left_in, R.anim.to_left_out);
+
         });
 
         final String[] fragmentsTitles = new String[]{getString(R.string.expenses), getString(R.string.incomes)};

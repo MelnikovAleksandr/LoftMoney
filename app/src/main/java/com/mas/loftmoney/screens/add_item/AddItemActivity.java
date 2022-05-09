@@ -88,10 +88,20 @@ public class AddItemActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         compositeDisposable.dispose();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
+    }
+
 }
+
+
