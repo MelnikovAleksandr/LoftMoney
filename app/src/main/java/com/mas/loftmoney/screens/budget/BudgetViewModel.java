@@ -24,6 +24,7 @@ public class BudgetViewModel extends ViewModel {
     public MutableLiveData<List<Item>> moneyItemList = new MutableLiveData<>();
     public MutableLiveData<String> messageString= new MutableLiveData<>("");
     public MutableLiveData<Integer> messageInt= new MutableLiveData<>(-1);
+    public MutableLiveData<Boolean> isEditMode = new MutableLiveData<>(false);
 
     @Override
     protected void onCleared() {

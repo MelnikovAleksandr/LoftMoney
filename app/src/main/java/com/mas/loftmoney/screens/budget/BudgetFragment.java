@@ -24,7 +24,7 @@ public class BudgetFragment extends Fragment {
     private static final String COLOR_ID = "colorId";
     public static final String TYPE = "fragmentType";
 
-    private ItemsAdapter itemsAdapter;
+    private ItemsAdapter itemsAdapter = new ItemsAdapter();
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -41,6 +41,22 @@ public class BudgetFragment extends Fragment {
         bundle.putString(TYPE, type);
         budgetFragment.setArguments(bundle);
         return budgetFragment;
+    }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        itemsAdapter.setMoneyCellAdapterClick(new MoneyCellAdapterClick() {
+
+            @Override
+            public void onCellClick(Item item) {
+                showToast("Click" + item.getName());
+            }
+
+            @Override
+            public void onLongCellClick(Item item) {
+                showToast("LongClick" + item.getName());
+            }
+        });
     }
 
     @Nullable
@@ -68,10 +84,10 @@ public class BudgetFragment extends Fragment {
 
         recyclerView.addItemDecoration(new DividerItemDecoration(getResources()));
         if (getArguments() != null) {
-            itemsAdapter = new ItemsAdapter(getArguments().getInt(COLOR_ID));
+            itemsAdapter.setColor(getArguments().getInt(COLOR_ID));
             type = getArguments().getString(TYPE);
         } else {
-            itemsAdapter = new ItemsAdapter(R.color.cell_value_color);
+            itemsAdapter.setColor(R.color.cell_value_color);
         }
         recyclerView.setAdapter(itemsAdapter);
     }

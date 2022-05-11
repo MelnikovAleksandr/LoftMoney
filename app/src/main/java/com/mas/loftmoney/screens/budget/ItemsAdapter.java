@@ -16,18 +16,26 @@ import java.util.List;
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
     private final List<Item> itemList = new ArrayList<>();
-    private final int colorId;
+    private int colorId;
 
-    public ItemsAdapter(int colorId) {
-        this.colorId = colorId;
+    public MoneyCellAdapterClick moneyCellAdapterClick;
+
+    public ItemsAdapter() {
+
     }
 
+    public void setColor(int colorId) {
+        this.colorId = colorId;
+    }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = View.inflate(parent.getContext(), R.layout.cell_money, null);
         return new ItemViewHolder(itemView, colorId);
+    }
+    public void setMoneyCellAdapterClick(MoneyCellAdapterClick moneyCellAdapter) {
+        moneyCellAdapterClick = moneyCellAdapter;
     }
 
     @Override
@@ -56,6 +64,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
         private TextView titleTextView;
         private TextView valueTextView;
+        public MoneyCellAdapterClick moneyCellAdapterClick;
 
         public ItemViewHolder(@NonNull View view, int colorId) {
             super(view);
@@ -68,6 +77,29 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         public void bindItem(@NonNull final Item item) {
             titleTextView.setText(item.getName());
             valueTextView.setText(String.valueOf(item.getAmount()) + " $");
+
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(),
+                    item.isSelected() ? R.color.selected_cell_menu : R.color.white));
+
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (moneyCellAdapterClick != null) {
+                        moneyCellAdapterClick.onCellClick(item);
+                    }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (moneyCellAdapterClick !=null) {
+                        moneyCellAdapterClick.onLongCellClick(item);
+                    }
+                    return true;
+                }
+            });
 
         }
     }
