@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.mas.loftmoney.remote.LoftApp;
 import com.mas.loftmoney.R;
 import com.mas.loftmoney.remote.MoneyApi;
+import com.mas.loftmoney.screens.main.EditModeListener;
 
 
 public class BudgetFragment extends Fragment {
@@ -54,7 +55,9 @@ public class BudgetFragment extends Fragment {
 
             @Override
             public void onLongCellClick(Item item) {
-                showToast("LongClick" + item.getName());
+                if(!budgetViewModel.isEditMode.getValue()) {
+                budgetViewModel.isEditMode.postValue(true);
+                }
             }
         });
     }
@@ -109,6 +112,15 @@ public class BudgetFragment extends Fragment {
         budgetViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
         budgetViewModel.moneyItemList.observe(getViewLifecycleOwner(), itemList -> {
             itemsAdapter.setData(itemList);
+        });
+
+        budgetViewModel.isEditMode.observe(getViewLifecycleOwner(),isEditMode -> {
+            Fragment parentFragment = getParentFragment();
+            if (parentFragment instanceof EditModeListener) {
+                ((EditModeListener) parentFragment).onEditModeChanged(isEditMode);
+            } else {
+
+            }
         });
         budgetViewModel.messageString.observe(getViewLifecycleOwner(), message -> {
             if(!message.equals("")) {
