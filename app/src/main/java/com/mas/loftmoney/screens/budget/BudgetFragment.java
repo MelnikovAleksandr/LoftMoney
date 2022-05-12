@@ -2,6 +2,7 @@ package com.mas.loftmoney.screens.budget;
 
 import android.os.Bundle;
 
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class BudgetFragment extends Fragment {
 
     private BudgetViewModel budgetViewModel;
 
+    private ActionMode mActionMode;
 
     public static BudgetFragment newInstance(final int colorId, final String type) {
         BudgetFragment budgetFragment = new BudgetFragment();
@@ -49,12 +51,12 @@ public class BudgetFragment extends Fragment {
 
             @Override
             public void onCellClick(Item item) {
-                showToast("Click" + item.getName());
+                showToast("Click " + item.getName());
             }
 
             @Override
             public void onLongCellClick(Item item) {
-                showToast("LongClick" + item.getName());
+                showToast("LongClick " + item.getName());
             }
         });
     }

@@ -32,7 +32,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = View.inflate(parent.getContext(), R.layout.cell_money, null);
-        return new ItemViewHolder(itemView, colorId);
+        return new ItemViewHolder(itemView, colorId, moneyCellAdapterClick);
     }
     public void setMoneyCellAdapterClick(MoneyCellAdapterClick moneyCellAdapter) {
         moneyCellAdapterClick = moneyCellAdapter;
@@ -66,9 +66,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         private TextView valueTextView;
         public MoneyCellAdapterClick moneyCellAdapterClick;
 
-        public ItemViewHolder(@NonNull View view, int colorId) {
+        public ItemViewHolder(@NonNull View view, int colorId, MoneyCellAdapterClick moneyCellAdapterClick) {
             super(view);
 
+            this.moneyCellAdapterClick = moneyCellAdapterClick;
             titleTextView = itemView.findViewById(R.id.moneyCellTitleView);
             valueTextView = itemView.findViewById(R.id.moneyCellValueView);
             valueTextView.setTextColor(ContextCompat.getColor(valueTextView.getContext(), colorId));
