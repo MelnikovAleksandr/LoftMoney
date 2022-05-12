@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -18,9 +20,11 @@ import com.mas.loftmoney.R;
 import com.mas.loftmoney.screens.add_item.AddItemActivity;
 import com.mas.loftmoney.screens.budget.BudgetFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EditModeListener{
 
     private int currentPosition = 0;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
+
+        //toolbar = findViewById(R.id.toolBar);
 
         ViewPager2 viewPager = findViewById(R.id.view_pager);
 
@@ -64,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(fragmentsTitles[position])).attach();
     }
 
+    @Override
+    public void onEditModeChanged(boolean status) {
+        toolbar.findViewById(R.id.toolBar);
+        toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), status ? R.color.selection_menu : R.color.main_blue));
+    }
+
     public class ViewPagerAdapter extends FragmentStateAdapter {
 
         private Fragment fragment;
@@ -94,4 +106,5 @@ public class MainActivity extends AppCompatActivity {
             return 2;
         }
     }
+
 }
