@@ -2,6 +2,9 @@ package com.mas.loftmoney.screens.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,11 +23,14 @@ import com.mas.loftmoney.R;
 import com.mas.loftmoney.screens.add_item.AddItemActivity;
 import com.mas.loftmoney.screens.budget.BudgetFragment;
 
-public class MainActivity extends AppCompatActivity implements EditModeListener{
+public class MainActivity extends AppCompatActivity {
 
     private int currentPosition = 0;
 
+    private TabLayout tabLayout;
     private Toolbar toolbar;
+    private FloatingActionButton floatingActionButton;
+    private ViewPager2 viewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,11 +38,11 @@ public class MainActivity extends AppCompatActivity implements EditModeListener{
 
         setContentView(R.layout.activity_main);
 
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout = findViewById(R.id.tab_layout);
 
-        //toolbar = findViewById(R.id.toolBar);
+        toolbar = findViewById(R.id.toolBar);
 
-        ViewPager2 viewPager = findViewById(R.id.view_pager);
+        viewPager = findViewById(R.id.view_pager);
 
         viewPager.setAdapter(new ViewPagerAdapter(this));
 
@@ -50,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements EditModeListener{
 
         FloatingActionButton floatingActionButton = findViewById(R.id.add_button_main);
         Intent intent = new Intent(this, AddItemActivity.class);
-
 
         floatingActionButton.setOnClickListener(view -> {
             String type = "0";
@@ -71,9 +76,31 @@ public class MainActivity extends AppCompatActivity implements EditModeListener{
     }
 
     @Override
-    public void onEditModeChanged(boolean status) {
-        toolbar.findViewById(R.id.toolBar);
-        toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), status ? R.color.selection_menu : R.color.main_blue));
+    public void onActionModeStarted(ActionMode mode) {
+        super.onActionModeStarted(mode);
+        floatingActionButton = findViewById(R.id.add_button_main);
+        floatingActionButton.hide();
+        tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.selection_menu));
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.selection_menu));
+
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.selection_menu));
+    }
+
+    @Override
+    public void onActionModeFinished(ActionMode mode) {
+        super.onActionModeFinished(mode);
+        floatingActionButton = findViewById(R.id.add_button_main);
+        floatingActionButton.show();
+        tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.main_blue));
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.main_blue));
+
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.main_blue));
     }
 
     public class ViewPagerAdapter extends FragmentStateAdapter {

@@ -1,9 +1,14 @@
 package com.mas.loftmoney.screens.budget;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -18,10 +23,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.mas.loftmoney.remote.LoftApp;
 import com.mas.loftmoney.R;
 import com.mas.loftmoney.remote.MoneyApi;
-import com.mas.loftmoney.screens.main.EditModeListener;
 
 
-public class BudgetFragment extends Fragment {
+public class BudgetFragment extends Fragment implements MoneyCellAdapterClick, ActionMode.Callback {
 
     private static final String COLOR_ID = "colorId";
     public static final String TYPE = "fragmentType";
@@ -31,6 +35,7 @@ public class BudgetFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private MoneyApi moneyApi;
+
     private String type;
 
     private BudgetViewModel budgetViewModel;
@@ -45,34 +50,13 @@ public class BudgetFragment extends Fragment {
         budgetFragment.setArguments(bundle);
         return budgetFragment;
     }
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        itemsAdapter.setMoneyCellAdapterClick(new MoneyCellAdapterClick() {
 
-            @Override
-            public void onCellClick(Item item) {
-                showToast("Click " + item.getName());
-            }
-
-            @Override
-            public void onLongCellClick(Item item) {
-
-                showToast("LongClick " + item.getName());
-
-                if(!budgetViewModel.isEditMode.getValue()) {
-                budgetViewModel.isEditMode.postValue(true);
-                }
-            }
-        });
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_budget,container,false);
+        return inflater.inflate(R.layout.fragment_budget, container, false);
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -93,6 +77,7 @@ public class BudgetFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getResources()));
         if (getArguments() != null) {
             itemsAdapter.setColor(getArguments().getInt(COLOR_ID));
+            itemsAdapter.setMoneyCellAdapterClick(this);
             type = getArguments().getString(TYPE);
         } else {
             itemsAdapter.setColor(R.color.cell_value_color);
@@ -110,36 +95,93 @@ public class BudgetFragment extends Fragment {
     private void loadItems() {
 
         budgetViewModel.loadItemsData(((LoftApp) getActivity().getApplication())
-                .moneyApi, type, getActivity().getSharedPreferences(getString(R.string.app_name),0));
+                .moneyApi, type, getActivity().getSharedPreferences(getString(R.string.app_name), 0));
 
     }
+
     private void configureViewModel() {
         budgetViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
         budgetViewModel.moneyItemList.observe(getViewLifecycleOwner(), itemList -> {
             itemsAdapter.setData(itemList);
         });
-
-        budgetViewModel.isEditMode.observe(getViewLifecycleOwner(),isEditMode -> {
-            Fragment parentFragment = getParentFragment();
-            if (parentFragment instanceof EditModeListener) {
-                ((EditModeListener) parentFragment).onEditModeChanged(isEditMode);
-            } else {
-
-            }
-        });
         budgetViewModel.messageString.observe(getViewLifecycleOwner(), message -> {
-            if(!message.equals("")) {
+            if (!message.equals("")) {
                 showToast(message);
             }
         });
         budgetViewModel.messageInt.observe(getViewLifecycleOwner(), message -> {
-            if (message > 0 ) {
+            if (message > 0) {
                 showToast(getString(message));
             }
         });
     }
 
-    private void showToast (String message) {
+    private void showToast(String message) {
         Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+        mActionMode = actionMode;
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+        MenuInflater menuInflater = new MenuInflater(getActivity());
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.remove) {
+            new AlertDialog.Builder(getContext(), R.style.MyDialogTheme)
+                    .setMessage(R.string.confirm)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            mActionMode.finish();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    }).show();
+        }
+        return true;
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode actionMode) {
+        mActionMode = null;
+        itemsAdapter.clearSelections();
+    }
+
+    @Override
+    public void onCellClick(Item item, int position) {
+        if (mActionMode != null) {
+            item.setSelected(!item.isSelected());
+            itemsAdapter.updateItem(item);
+            itemsAdapter.toggleItem(position);
+            mActionMode.setTitle(getString(R.string.selected, String.valueOf(itemsAdapter.getSelectedSize())));
+        }
+    }
+
+    @Override
+    public void onLongCellClick(Item item, int position) {
+        item.setSelected(true);
+        itemsAdapter.updateItem(item);
+        budgetViewModel.isEditMode.postValue(true);
+        if (mActionMode == null) {
+            getActivity().startActionMode(this);
+        }
+        itemsAdapter.toggleItem(position);
+        if (mActionMode != null) {
+            mActionMode.setTitle(getString(R.string.selected, String.valueOf(itemsAdapter.getSelectedSize())));
+        }
     }
 }

@@ -7,10 +7,20 @@ public class Item {
     private String name;
     private double amount;
     private boolean isSelected;
+    private int id;
 
     public Item(String name, double amount) {
         this.name = name;
         this.amount = amount;
+        this.isSelected = false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isSelected() {
