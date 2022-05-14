@@ -92,7 +92,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
             itemView.setSelected(isSelected);
             titleTextView.setText(item.getName());
             valueTextView.setText(String.valueOf(item.getAmount()) + " $");
-
+            item.setSelected(isSelected);
             itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(),
                     item.isSelected() ? R.color.selected_cell_menu : R.color.white));
 
@@ -132,6 +132,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
             }
         }
         return result;
+    }
+    public List<Item> getMoneyItemList() {
+        return itemList;
     }
 
 }

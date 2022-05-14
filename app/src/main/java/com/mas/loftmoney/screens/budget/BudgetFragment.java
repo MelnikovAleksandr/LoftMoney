@@ -88,8 +88,17 @@ public class BudgetFragment extends Fragment implements MoneyCellAdapterClick, A
     @Override
     public void onResume() {
         super.onResume();
-
         loadItems();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mActionMode != null) {
+            mActionMode.finish();
+//            itemsAdapter.clearSelections();
+//            mActionMode.setTitle(getString(R.string.selected, String.valueOf(itemsAdapter.getSelectedSize())));
+        }
     }
 
     private void loadItems() {
@@ -97,6 +106,11 @@ public class BudgetFragment extends Fragment implements MoneyCellAdapterClick, A
         budgetViewModel.loadItemsData(((LoftApp) getActivity().getApplication())
                 .moneyApi, type, getActivity().getSharedPreferences(getString(R.string.app_name), 0));
 
+    }
+
+    private void deleteMoneys() {
+        budgetViewModel.deleteMoneys(((LoftApp) getActivity().getApplication())
+                .moneyApi, getActivity().getSharedPreferences(getString(R.string.app_name), 0), itemsAdapter.getMoneyItemList());
     }
 
     private void configureViewModel() {
@@ -112,6 +126,11 @@ public class BudgetFragment extends Fragment implements MoneyCellAdapterClick, A
         budgetViewModel.messageInt.observe(getViewLifecycleOwner(), message -> {
             if (message > 0) {
                 showToast(getString(message));
+            }
+        });
+        budgetViewModel.removeItemDoneSuccess.observe(getViewLifecycleOwner(), success -> {
+            if (success) {
+                loadItems();
             }
         });
     }
@@ -141,7 +160,7 @@ public class BudgetFragment extends Fragment implements MoneyCellAdapterClick, A
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                            deleteMoneys();
                             mActionMode.finish();
                         }
                     })

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class MoneyRemoteItem {
     @SerializedName("id")
-    private String ItemId;
+    private int ItemId;
     @SerializedName("name")
     private String name;
     @SerializedName("price")
@@ -14,11 +14,11 @@ public class MoneyRemoteItem {
     @SerializedName("date")
     private String date;
 
-    public String getItemId() {
+    public int getItemId() {
         return ItemId;
     }
 
-    public void setItemId(String itemId) {
+    public void setItemId(int itemId) {
         ItemId = itemId;
     }
 

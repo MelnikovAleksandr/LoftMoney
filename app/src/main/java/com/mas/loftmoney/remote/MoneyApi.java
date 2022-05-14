@@ -15,10 +15,16 @@ public interface MoneyApi {
     @GET("./items")
     Single<List<MoneyRemoteItem>> getMoneyItems(@Query("type") String type, @Query("auth-token") String token);
 
+
     @POST("./items/add")
     @FormUrlEncoded
     Completable addMoney(@Field("price") int price,
                          @Field("name") String name,
                          @Field("type") String type,
                          @Field("auth-token") String token);
+
+    @POST("./items/remove")
+    @FormUrlEncoded
+    Completable deleteMoney(@Field("id") int id,
+                            @Field("auth-token") String token);
 }

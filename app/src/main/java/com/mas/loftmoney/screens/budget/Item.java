@@ -9,10 +9,11 @@ public class Item {
     private boolean isSelected;
     private int id;
 
-    public Item(String name, double amount) {
+    public Item(String name, double amount, int id) {
         this.name = name;
         this.amount = amount;
         this.isSelected = false;
+        this.id = id;
     }
 
     public int getId() {
@@ -48,6 +49,6 @@ public class Item {
     }
 
     public static Item getInstance(MoneyRemoteItem moneyRemoteItem) {
-        return new Item(moneyRemoteItem.getName(), moneyRemoteItem.getPrice());
+        return new Item(moneyRemoteItem.getName(), moneyRemoteItem.getPrice(), moneyRemoteItem.getItemId());
     }
 }
