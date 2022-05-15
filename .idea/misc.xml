@@ -25,14 +25,17 @@
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/activity_main.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/balance.xml" value="0.234375" />
+        <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/balance_fragment.xml" value="0.4" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/cell_money.xml" value="0.264" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/cell_money_expenses.xml" value="0.2203125" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/cell_money_income.xml" value="0.2203125" />
-        <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/login_activity.xml" value="0.536" />
+        <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/fragment_budget.xml" value="0.25" />
+        <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/login_activity.xml" value="0.264" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/main_fragments_activity.xml" value="0.2" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/recycler_view.xml" value="0.234375" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/recycler_view_expenses.xml" value="0.176" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/layout/recycler_view_income.xml" value="0.2" />
+        <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney/app/src/main/res/menu/menu.xml" value="0.25" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney23/app/src/main/res/layout/cell_money.xml" value="0.25" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftMoney23/app/src/main/res/layout/recycler_view.xml" value="0.25" />
         <entry key="..\:/Users/melni/AndroidStudioProjects/LoftSchool/app/src/main/res/layout/activity_add_item.xml" value="0.264" />

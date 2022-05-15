@@ -14,24 +14,22 @@
         android:theme="@style/Theme.LoftSchool">
         <activity
             android:name=".screens.main.MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
-                android:name=".screens.add_item.AddItemActivity"
-                android:exported="false" >
-        </activity>
+            android:name=".screens.add_item.AddItemActivity"
+            android:exported="false" />
         <activity
             android:name=".screens.splash.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".screens.login.LoginActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

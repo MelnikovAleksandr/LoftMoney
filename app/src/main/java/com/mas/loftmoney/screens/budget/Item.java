@@ -6,10 +6,30 @@ public class Item {
 
     private String name;
     private double amount;
+    private boolean isSelected;
+    private int id;
 
-    public Item(String name, double amount) {
+    public Item(String name, double amount, int id) {
         this.name = name;
         this.amount = amount;
+        this.isSelected = false;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public String getName() {
@@ -29,6 +49,6 @@ public class Item {
     }
 
     public static Item getInstance(MoneyRemoteItem moneyRemoteItem) {
-        return new Item(moneyRemoteItem.getName(), moneyRemoteItem.getPrice());
+        return new Item(moneyRemoteItem.getName(), moneyRemoteItem.getPrice(), moneyRemoteItem.getId());
     }
 }

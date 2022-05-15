@@ -27,10 +27,12 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
+            overridePendingTransition(R.anim.alpha_in, R.anim.alpha_out);
         } else {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
+            overridePendingTransition(R.anim.alpha_in, R.anim.alpha_out);
         }
     }
 }

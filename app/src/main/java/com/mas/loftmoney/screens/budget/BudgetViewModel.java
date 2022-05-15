@@ -22,8 +22,11 @@ public class BudgetViewModel extends ViewModel {
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     public MutableLiveData<List<Item>> moneyItemList = new MutableLiveData<>();
-    public MutableLiveData<String> messageString= new MutableLiveData<>("");
-    public MutableLiveData<Integer> messageInt= new MutableLiveData<>(-1);
+    public MutableLiveData<String> messageString = new MutableLiveData<>("");
+    public MutableLiveData<Integer> messageInt = new MutableLiveData<>(-1);
+    public MutableLiveData<Boolean> isEditMode = new MutableLiveData<>(false);
+    public MutableLiveData<Boolean> removeItemDoneSuccess = new MutableLiveData<>(false);
+
 
     @Override
     protected void onCleared() {
@@ -31,10 +34,10 @@ public class BudgetViewModel extends ViewModel {
         super.onCleared();
     }
 
-    public void loadItemsData (MoneyApi moneyApi, String type, SharedPreferences sharedPreferences) {
-        String authToken = sharedPreferences.getString(LoftApp.AUTH_KEY,"");
+    public void loadItemsData(MoneyApi moneyApi, String type, SharedPreferences sharedPreferences) {
+        String authToken = sharedPreferences.getString(LoftApp.AUTH_KEY, "");
 
-        compositeDisposable.add(moneyApi.getMoneyItems(type,authToken)
+        compositeDisposable.add(moneyApi.getMoneyItems(type, authToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(unsortedList -> {
@@ -42,7 +45,7 @@ public class BudgetViewModel extends ViewModel {
                     Collections.sort(sortedList, new Comparator<MoneyRemoteItem>() {
                         @Override
                         public int compare(MoneyRemoteItem t1, MoneyRemoteItem t2) {
-                            if (t1.getDate() == null || t2.getDate() ==null)
+                            if (t1.getDate() == null || t2.getDate() == null)
                                 return 0;
                             return t1.getDate().compareTo(t2.getDate());
                         }
@@ -59,5 +62,24 @@ public class BudgetViewModel extends ViewModel {
                 }, throwable -> {
                     messageString.postValue(throwable.getLocalizedMessage());
                 }));
+    }
+
+    public void deleteMoneys(MoneyApi moneyApi, SharedPreferences sharedPreferences, List<Item> itemList) {
+        String authToken = sharedPreferences.getString(LoftApp.AUTH_KEY, "");
+
+        for (Item item : itemList) {
+            if (item.isSelected()) {
+                compositeDisposable.add(moneyApi.deleteMoney(item.getId(), authToken)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(() -> {
+                                    removeItemDoneSuccess.postValue(true);
+                                },
+                                error -> {
+                                    removeItemDoneSuccess.postValue(false);
+                                    messageString.postValue(error.getLocalizedMessage());
+                                }));
+            }
+        }
     }
 }
