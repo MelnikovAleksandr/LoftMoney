@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.mas.loftmoney.R;
 import com.mas.loftmoney.screens.add_item.AddItemActivity;
+import com.mas.loftmoney.screens.balance.BalanceFragment;
 import com.mas.loftmoney.screens.budget.BudgetFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageSelected(position);
                 currentPosition = position;
             }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                floatingActionButton = findViewById(R.id.add_button_main);
+                if (position == 2) {
+                    floatingActionButton.hide();
+                } else {
+                    floatingActionButton.show();
+                }
+            }
         });
 
         FloatingActionButton floatingActionButton = findViewById(R.id.add_button_main);
@@ -70,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        final String[] fragmentsTitles = new String[]{getString(R.string.expenses), getString(R.string.incomes)};
+        final String[] fragmentsTitles = new String[]{getString(R.string.expenses), getString(R.string.incomes), getString(R.string.balance)};
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(fragmentsTitles[position])).attach();
     }
@@ -123,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
                     return BudgetFragment.newInstance(R.color.cell_value_color, getString(R.string.expense));
                 case 1:
                     return BudgetFragment.newInstance(R.color.all_green_elements, getString(R.string.income));
+                case 2:
+                    return BalanceFragment.getInstanceBalance();
                 default:
                     return null;
             }
@@ -130,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 2;
+            return 3;
         }
     }
 

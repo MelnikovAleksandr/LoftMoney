@@ -47,7 +47,7 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = nameEditText.getText().toString();
-                int price = Integer.parseInt(valueEditText.getText().toString());
+                double price = Double.parseDouble(valueEditText.getText().toString());
 
                 Bundle args = getIntent().getExtras();
                 String type = args.getString(BudgetFragment.TYPE);

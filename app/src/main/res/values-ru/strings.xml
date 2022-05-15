@@ -18,8 +18,12 @@
     <string name="client_secret">972841536315-224ca3khm9k6ed91g6eidne3hbgrl80i.apps.googleusercontent.com</string>
     <string name="client_secret2">972841536315-1f3qr661m85nmiub1pjp7dfqlergl360.apps.googleusercontent.com</string>
     <string name="client_id">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</string>
+
     <string name="selected">Выбрано: %1$s</string>
     <string name="confirm">Вы уверены, что хотите удалить выделенные элементы?</string>
     <string name="remove">Удалить</string>
+    <string name="currency_sign">%s ₽</string>
+    <string name="txt_Finance">Доступные финансы</string>
+    <string name="balance">Баланс</string>
 
 </resources>

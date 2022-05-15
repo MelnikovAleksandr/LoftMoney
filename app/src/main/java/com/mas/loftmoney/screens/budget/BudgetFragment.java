@@ -96,8 +96,6 @@ public class BudgetFragment extends Fragment implements MoneyCellAdapterClick, A
         super.onPause();
         if (mActionMode != null) {
             mActionMode.finish();
-//            itemsAdapter.clearSelections();
-//            mActionMode.setTitle(getString(R.string.selected, String.valueOf(itemsAdapter.getSelectedSize())));
         }
     }
 

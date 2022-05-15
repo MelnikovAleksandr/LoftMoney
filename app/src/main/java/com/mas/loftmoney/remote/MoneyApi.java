@@ -18,7 +18,7 @@ public interface MoneyApi {
 
     @POST("./items/add")
     @FormUrlEncoded
-    Completable addMoney(@Field("price") int price,
+    Completable addMoney(@Field("price") double price,
                          @Field("name") String name,
                          @Field("type") String type,
                          @Field("auth-token") String token);
@@ -27,4 +27,7 @@ public interface MoneyApi {
     @FormUrlEncoded
     Completable deleteMoney(@Field("id") int id,
                             @Field("auth-token") String token);
+
+    @GET("./balance")
+    Single<List<BalanceResponse>> getBalance(@Query("auth-token") String token);
 }

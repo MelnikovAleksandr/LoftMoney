@@ -18,7 +18,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
     private final List<Item> itemList = new ArrayList<>();
     private int colorId;
-
     public MoneyCellAdapterClick moneyCellAdapterClick;
 
     private SparseBooleanArray selectedItems = new SparseBooleanArray();
@@ -91,7 +90,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
             itemView.setSelected(isSelected);
             titleTextView.setText(item.getName());
-            valueTextView.setText(String.valueOf(item.getAmount()) + " $");
+            valueTextView.setText(valueTextView.getContext().getString(R.string.currency_sign, String.valueOf(item.getAmount())));
             item.setSelected(isSelected);
             itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(),
                     item.isSelected() ? R.color.selected_cell_menu : R.color.white));

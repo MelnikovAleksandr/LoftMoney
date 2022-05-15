@@ -49,6 +49,6 @@ public class Item {
     }
 
     public static Item getInstance(MoneyRemoteItem moneyRemoteItem) {
-        return new Item(moneyRemoteItem.getName(), moneyRemoteItem.getPrice(), moneyRemoteItem.getItemId());
+        return new Item(moneyRemoteItem.getName(), moneyRemoteItem.getPrice(), moneyRemoteItem.getId());
     }
 }

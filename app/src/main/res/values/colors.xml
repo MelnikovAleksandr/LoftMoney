@@ -19,6 +19,7 @@
     <color name="selection_menu">#333F59</color>
     <color name="not_selection_text_">#8BAAEF</color>
     <color name="selected_cell_menu">#EFEFEF</color>
+    <color name="expenses_blue">#4A90E2</color>
 
 
 </resources>
