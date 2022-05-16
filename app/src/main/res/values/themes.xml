@@ -18,6 +18,9 @@
 
         <item name="android:textColorPrimary">@android:color/white</item>
 
+        <item name="expenses_pie_color">@color/main_blue</item>
+        <item name="incomes_pie_color">@color/all_green_elements</item>
+
 
     </style>
 </resources>

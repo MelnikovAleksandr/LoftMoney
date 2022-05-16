@@ -1,72 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/txtFinance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/txt_Finance"
-        android:layout_marginTop="37dp"
         android:layout_marginStart="19dp"
-        android:textSize="14sp"
+        android:layout_marginTop="37dp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/cell_title_color" />
+        android:text="@string/txt_Finance"
+        android:textColor="@color/cell_title_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtDelta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="67000"
-        app:layout_constraintTop_toBottomOf="@+id/txtFinance"
-        app:layout_constraintStart_toStartOf="@+id/txtFinance"
-        android:textSize="48sp"
         android:fontFamily="sans-serif-medium"
-        android:textColor="@color/add_button_main" />
+        android:text="67000 ₽"
+        android:textColor="@color/add_button_main"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="@+id/txtFinance"
+        app:layout_constraintTop_toBottomOf="@+id/txtFinance" />
 
     <View
         android:id="@+id/divider_balance"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginTop="38dp"
         android:background="@color/selected_cell_menu"
-        app:layout_constraintTop_toBottomOf="@+id/txtDelta"
-        android:layout_marginTop="38dp" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDelta" />
 
     <LinearLayout
         android:id="@+id/expensesll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="26dp"
-        android:paddingBottom="26dp"
         android:paddingStart="15dp"
+        android:paddingTop="26dp"
         android:paddingEnd="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/divider_balance"
+        android:paddingBottom="26dp"
+        app:layout_constraintEnd_toStartOf="@+id/incomesll"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/incomesll">
+        app:layout_constraintTop_toBottomOf="@+id/divider_balance">
 
         <TextView
             android:id="@+id/txt_expenses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:text="@string/expenses"
             android:textColor="@color/cell_title_color"
-            android:textSize="12sp"
-            android:fontFamily="sans-serif-light"
-            />
+            android:textSize="12sp" />
+
         <TextView
             android:id="@+id/expenses_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5400 ₽"
-            android:textSize="24dp"
             android:fontFamily="sans-serif-medium"
+            android:text="5400 ₽"
             android:textColor="@color/expenses_blue"
-            />
+            android:textSize="24sp" />
 
 
     </LinearLayout>
@@ -76,45 +75,47 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="26dp"
-        android:paddingBottom="26dp"
         android:paddingStart="15dp"
+        android:paddingTop="26dp"
         android:paddingEnd="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/divider_balance"
+        android:paddingBottom="26dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/expensesll">
+        app:layout_constraintStart_toEndOf="@+id/expensesll"
+        app:layout_constraintTop_toBottomOf="@+id/divider_balance">
 
         <TextView
             android:id="@+id/txt_incomes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:text="@string/incomes"
             android:textColor="@color/cell_title_color"
-            android:textSize="12sp"
-            android:fontFamily="sans-serif-light"
-            />
+            android:textSize="12sp" />
+
         <TextView
             android:id="@+id/incomes_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="74000 ₽"
-            android:textSize="24dp"
             android:fontFamily="sans-serif-medium"
+            android:text="74000 ₽"
             android:textColor="@color/all_green_elements"
-            />
+            android:textSize="24sp" />
     </LinearLayout>
+
     <View
         android:id="@+id/divider_balance2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/selected_cell_menu"
         app:layout_constraintTop_toBottomOf="@+id/incomesll" />
-    <View
+
+    <com.mas.loftmoney.screens.balance.BalanceView
+        android:id="@+id/pie_diagram"
         android:layout_width="184dp"
         android:layout_height="176dp"
         android:layout_marginTop="36dp"
-        app:layout_constraintTop_toBottomOf="@+id/divider_balance2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/divider_balance2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
