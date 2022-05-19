@@ -35,7 +35,7 @@ public class BalanceFragment extends Fragment {
         myIncomes = view.findViewById(R.id.incomes_balance);
         totalFinances = view.findViewById(R.id.txtDelta);
         myBalanceView = view.findViewById(R.id.pie_diagram);
-        getBalances(((LoftApp) getActivity().getApplication()).moneyApi, getActivity().getSharedPreferences(getString(R.string.app_name), 0));
+        reloadBalance();
         return view;
     }
 
@@ -68,17 +68,21 @@ public class BalanceFragment extends Fragment {
                 }, Throwable::getLocalizedMessage));
     }
 
+    public void reloadBalance() {
+        getBalances(((LoftApp) getActivity().getApplication()).moneyApi, getActivity().getSharedPreferences(getString(R.string.app_name), 0));
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        getBalances(((LoftApp) getActivity().getApplication()).moneyApi, getActivity().getSharedPreferences(getString(R.string.app_name), 0));
+        reloadBalance();
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed())
-            getBalances(((LoftApp) getActivity().getApplication()).moneyApi, getActivity().getSharedPreferences(getString(R.string.app_name), 0));
+            reloadBalance();
     }
 
     @Override

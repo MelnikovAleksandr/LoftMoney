@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new ViewPagerAdapter(this));
 
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -65,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate);
         FloatingActionButton floatingActionButton = findViewById(R.id.add_button_main);
         Intent intent = new Intent(this, AddItemActivity.class);
 
@@ -74,9 +80,12 @@ public class MainActivity extends AppCompatActivity {
                 type = "expense";
             } else if (currentPosition == 1) {
                 type = "income";
+            } else if (currentPosition == 2) {
+                type = "income";
             }
             intent.putExtra(BudgetFragment.TYPE, type);
             startActivity(intent);
+            view.startAnimation(animation);
             overridePendingTransition(R.anim.to_left_in, R.anim.to_left_out);
 
         });

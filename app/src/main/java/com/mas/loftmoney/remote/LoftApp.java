@@ -2,6 +2,7 @@ package com.mas.loftmoney.remote;
 
 import android.app.Application;
 
+import com.mas.loftmoney.BuildConfig;
 import com.mas.loftmoney.remote.MoneyApi;
 
 import okhttp3.OkHttpClient;
@@ -30,7 +31,7 @@ public class LoftApp extends Application {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://loftschool.com/android-api/basic/v1/")
+                .baseUrl(BuildConfig.URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

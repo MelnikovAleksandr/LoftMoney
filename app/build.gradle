@@ -3,6 +3,15 @@ plugins {
 }
 
 android {
+    signingConfigs {
+
+        release {
+            storeFile file('C:\\Users\\melni\\Desktop\\LoftSchool\\keys\\loftkey.jks')
+            storePassword '1234lopk1234'
+            keyAlias 'loftmoney'
+            keyPassword '1234lopk1234'
+        }
+    }
     compileSdk 31
 
     defaultConfig {
@@ -17,10 +26,50 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            buildConfigField("String", "URL", "\"https://loftschool.com/android-api/basic/v1/\"")
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            buildConfigField("String", "URL", "\"https://loftschool.com/android-api/basic/v1/\"")
+            resValue("string", "app_name", "LoftMoney-Debug")
+
         }
     }
+
+    flavorDimensions "another_colors"
+    productFlavors {
+        brigthColors {
+            dimension "another_colors"
+            buildConfigField("String", "URL", "\"https://loftschool.com/android-api/basic/v1/\"")
+            resValue("string", "app_name", "LoftMoneyBright")
+            resValue("color", "main_blue", "#315f72")
+            resValue("color", "main_background", "#315f72")
+            resValue("color", "all_green_elements", "#efb5a3")
+            resValue("color", "add_button_main", "#f57e7e")
+        }
+        twoThousandSeventhColors {
+            dimension "another_colors"
+            buildConfigField("String", "URL", "\"https://loftschool.com/android-api/basic/v1/\"")
+            resValue("string", "app_name", "LoftMoney2007")
+            resValue("color", "main_blue", "#da68a0")
+            resValue("color", "main_background", "#da68a0")
+            resValue("color", "all_green_elements", "#77c593")
+            resValue("color", "add_button_main", "#ed3572")
+        }
+        defaultColors {
+            dimension "another_colors"
+            buildConfigField("String", "URL", "\"https://loftschool.com/android-api/basic/v1/\"")
+            resValue("string", "app_name", "LoftMoney")
+            resValue("color", "main_blue", "#3574FA")
+            resValue("color", "main_background", "#3574FA")
+            resValue("color", "all_green_elements", "#7ED321")
+            resValue("color", "add_button_main", "#FF9E57")
+        }
+
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
