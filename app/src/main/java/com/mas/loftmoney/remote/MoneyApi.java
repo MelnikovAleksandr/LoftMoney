@@ -29,5 +29,5 @@ public interface MoneyApi {
                             @Field("auth-token") String token);
 
     @GET("./balance")
-    Single<List<BalanceResponse>> getBalance(@Query("auth-token") String token);
+    Single<BalanceResponse> getBalance(@Query("auth-token") String token);
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LoftSchool</string>
+
     <string name="edit_expenses">Цена</string>
     <string name="name_of_expenses">Название</string>
     <string name="button_to_add">ДОБАВИТЬ</string>
